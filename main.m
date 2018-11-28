@@ -3,7 +3,16 @@
 % Image location.
 image_sets_loc = 'signs/';
 % Image set folder names.
-image_sets = getFolders(image_sets_loc);
+image_set = getFolders(image_sets_loc);
+% Grab only the vid sets.
+j=1;
+% Grab only the vid sets.
+for i=1:length(image_set)
+    if regexp(image_set(i).name, regexptranslate('wildcard','vid*'))
+        vid_sets(j).name = image_set(i).name;
+        j=j+1;
+    end
+end
 
 % TODO: tracker, type struct with fields
     % name: image name
@@ -11,6 +20,8 @@ image_sets = getFolders(image_sets_loc);
     % output: percentage (confidence level from the algorithm)
 
 % TODO: Get a random image set from the sets.
+set_idx = floor(rand(1)*length(image_set))+1;
+
 
 %% Hough Transform
 
