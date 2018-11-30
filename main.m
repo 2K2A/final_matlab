@@ -1,19 +1,20 @@
 %% Boilerplate
 
 % Image location.
-image_sets_loc = 'signs/';
+img_sets_loc = 'signs/';
 % Image set folder names.
-image_sets = {'aiua120214-0','aiua120214-1','aiua120214-2','aiua120306-0','aiua120306-1'};
+img_sets = {'aiua120214-0','aiua120214-1','aiua120214-2','aiua120306-0','aiua120306-1'};
 
+% tracker, type cell array, contains image annotation structs of best and 
+% worst matches.
 best_worst = {};
-% TODO: tracker, type cell array, contains image annotation structs.
-    % name: image name
-    % annotation: yes/no (from the image annotations)
-    % output: percentage (confidence level from the algorithm)
 
-% TODO: Get a random image set from the sets.
-set_idx = floor(rand(1)*length(image_sets))+1;
+% Get a random image-set from the sets.
+set_idx = floor(rand(1)*length(img_sets))+1;
 
+% Get a list of images in the set (to pass to the next section).
+img_set_sub = getFolders(strcat(image_sets_loc,image_sets{3}));
+img_set = getFiles(strjoin({image_sets_loc,image_sets{3},sub_f.name},"/"));
 
 %% Hough Transform
 
