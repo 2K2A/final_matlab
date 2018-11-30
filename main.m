@@ -3,24 +3,16 @@
 % Image location.
 image_sets_loc = 'signs/';
 % Image set folder names.
-image_set = getFolders(image_sets_loc);
-% Grab only the vid sets.
-j=1;
-% Grab only the vid sets.
-for i=1:length(image_set)
-    if regexp(image_set(i).name, regexptranslate('wildcard','vid*'))
-        vid_sets(j).name = image_set(i).name;
-        j=j+1;
-    end
-end
+image_sets = {'aiua120214-0','aiua120214-1','aiua120214-2','aiua120306-0','aiua120306-1'};
 
-% TODO: tracker, type struct with fields
+best_worst = {};
+% TODO: tracker, type cell array, contains image annotation structs.
     % name: image name
     % annotation: yes/no (from the image annotations)
     % output: percentage (confidence level from the algorithm)
 
 % TODO: Get a random image set from the sets.
-set_idx = floor(rand(1)*length(image_set))+1;
+set_idx = floor(rand(1)*length(image_sets))+1;
 
 
 %% Hough Transform
