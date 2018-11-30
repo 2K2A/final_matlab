@@ -2,3 +2,4 @@ papers/
 signs/
 test_*
 *.zip
+.ipynb_*
