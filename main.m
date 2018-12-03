@@ -24,6 +24,7 @@ for i=length(img_set)
     % Read the image in.
     img = imread(strjoin({img_set(i).folder,img_set(i).name},"/"));
     % TODO: implement an object recognition algorithm.
+    has_stop_sign = hasStopSign(img);
 end
 
 %% Results
