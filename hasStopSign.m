@@ -11,5 +11,8 @@ end
 % if not(test(image)) % Please break test into another script test.m
 %     return
 % end
+if not(hasEqualSides(image)) % Please break test into another script test.m
+    return
+end
 
 has_stop_sign = true;
