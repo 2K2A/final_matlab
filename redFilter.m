@@ -1,9 +1,15 @@
-function filtered_image = redFilter(image)
+function filtered_image = redFilter(image, minRed, maxRed)
 I = image;
+if nargin < 3
+    maxRed = 255.000;
+end
+if nargin < 2
+    minRed = 116.000;
+end
 
 % Define thresholds for channel 1 based on histogram settings
-channel1Min = 116.000;
-channel1Max = 255.000;
+channel1Min = minRed;
+channel1Max = maxRed;
 
 % Define thresholds for channel 2 based on histogram settings
 channel2Min = 0.000;
@@ -11,7 +17,7 @@ channel2Max = 82.000;
 
 % Define thresholds for channel 3 based on histogram settings
 channel3Min = 0.000;
-channel3Max = 83.000;
+channel3Max = 82.000;
 
 % Create mask based on chosen histogram thresholds
 sliderBW = (I(:,:,1) >= channel1Min ) & (I(:,:,1) <= channel1Max) & ...
