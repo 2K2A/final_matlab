@@ -3,7 +3,7 @@ clear;
 % Image location.
 img_sets_loc = 'signs/';
 % Image set folder names.
-img_sets = {'aiua120214-0','aiua120214-1','aiua120214-2','aiua120306-0','aiua120306-1'};
+img_sets = {'vid0','vid1','vid2','vid3','vid4','vid5','vid6','vid7','vid8','vid9','vid10','vid11',};
 
 % tracker, type cell array, contains image annotation structs of best and 
 % worst matches, as well as % confidence of each match.
