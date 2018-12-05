@@ -19,8 +19,9 @@ img_set = getFiles(strjoin({img_sets_loc,img_sets{3},img_set_sub.name},"/"));
 
 %% Hough Transform
 
-for i=length(img_set)
+for i=1:length(img_set)
 % For an image in image_set
+    i
     % Read the image in.
     img = imread(strjoin({img_set(i).folder,img_set(i).name},"/"));
     % TODO: implement an object recognition algorithm.
