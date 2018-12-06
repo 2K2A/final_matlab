@@ -1,4 +1,5 @@
-function matches_template = matchesTemplate(image)
+function confidence = matchesTemplate(image)
+confidence = 0;
 filtered_image = redFilter(image);
 
 dilated_image = bwmorph(filtered_image, 'dilate', 5);
@@ -10,7 +11,6 @@ filtered_image = imgaussfilt(uint8(filtered_image));
 [labeledImage, numberOfBlobs] = bwlabel(filtered_image);
 blobMeasurements = regionprops(labeledImage, 'area');
 if numberOfBlobs == 0
-    matches_template = false;
     return
 end
 % Get all the areas
@@ -49,13 +49,11 @@ RA = imref2d([size(hexMask,1) size(hexMask,2)], [1 size(hexMask,2)], [1 size(hex
 % image(out);
 % roi = [floor(BoundingBox(1)) floor(BoundingBox(2))...
 %     ceil(BoundingBox(1)+BoundingBox(3)) ceil(BoundingBox(2)+BoundingBox(4))];
-roi = BoundingBox;
-testOcr = ocr(image, roi)
 
 dif = imabsdiff(out,biggestBlob);
 totalDifference = sum(dif(:));
 totalPixels = BoundingBox(3)*BoundingBox(4);
-percentDifferent = totalDifference/totalPixels
-imshowpair(out,biggestBlob);
-matches_template = percentDifferent <= 0.1;
+percentDifferent = totalDifference/totalPixels;
+confidence = max(0, 100 - (percentDifferent/0.2)*100);
+%imshowpair(out,biggestBlob);
 

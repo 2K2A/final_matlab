@@ -1,18 +1,10 @@
 function has_stop_sign = hasStopSign(image)
 % By default there is no stop sign
 % If all tests pass, then we can assume there is a stop sign
-has_stop_sign = false;
+score = 0;
+maxScore = 100;
 
-if not(hasEightSides(image))
-    return
-end
+score = score + matchesTemplate(image);
 
-% add tests by doing the following:
-% if not(test(image)) % Please break test into another script test.m
-%     return
-% end
-if not(hasEqualSides(image)) % Please break test into another script test.m
-    return
-end
-
-has_stop_sign = true;
+stop_sign_confidence = score / maxScore;
+has_stop_sign = stop_sign_likelihood >= 0.5;
