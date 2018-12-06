@@ -47,6 +47,10 @@ RA = imref2d([size(hexMask,1) size(hexMask,2)], [1 size(hexMask,2)], [1 size(hex
 % figure, imshow(image), hold on
 % rectangle('Position', props(1).BoundingBox);  
 % image(out);
+% roi = [floor(BoundingBox(1)) floor(BoundingBox(2))...
+%     ceil(BoundingBox(1)+BoundingBox(3)) ceil(BoundingBox(2)+BoundingBox(4))];
+roi = BoundingBox;
+testOcr = ocr(image, roi)
 
 dif = imabsdiff(out,biggestBlob);
 totalDifference = sum(dif(:));
