@@ -171,7 +171,8 @@ imshow(ITextRegion)
 title('Detected Text')
 
 ocrtxt = ocr(I, textBBoxes);
-string = [ocrtxt.Text]
+string = [ocrtxt.Text];
+string = deblank(string)
 TF = contains(string, 'STOP')
 
 if (contains(string, 'STOP') == 1) 
