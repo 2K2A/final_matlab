@@ -6,12 +6,12 @@ I = rgb2gray(image);
 [mserRegions, mserConnComp] = detectMSERFeatures(I, ... 
     'RegionAreaRange',[200 8000],'ThresholdDelta',4);
 
-figure
-imshow(I)
-hold on
-plot(mserRegions, 'showPixelList', true,'showEllipses',false)
-title('MSER regions')
-hold off
+% figure
+% imshow(I)
+% hold on
+% plot(mserRegions, 'showPixelList', true,'showEllipses',false)
+% title('MSER regions')
+% hold off
 
 % Use regionprops to measure MSER properties
 mserStats = regionprops(mserConnComp, 'BoundingBox', 'Eccentricity', ...
@@ -36,12 +36,12 @@ mserStats(filterIdx) = [];
 mserRegions(filterIdx) = [];
 
 % Show remaining regions
-figure
-imshow(I)
-hold on
-plot(mserRegions, 'showPixelList', true,'showEllipses',false)
-title('After Removing Non-Text Regions Based On Geometric Properties')
-hold off
+% figure
+% imshow(I)
+% hold on
+% plot(mserRegions, 'showPixelList', true,'showEllipses',false)
+% title('After Removing Non-Text Regions Based On Geometric Properties')
+% hold off
 
 % Get a binary image of the a region, and pad it to avoid boundary effects
 % during the stroke width computation.
@@ -56,14 +56,14 @@ strokeWidthImage = distanceImage;
 strokeWidthImage(~skeletonImage) = 0;
 
 % Show the region image alongside the stroke width image. 
-figure
-subplot(1,2,1)
-imagesc(regionImage)
-title('Region Image')
-
-subplot(1,2,2)
-imagesc(strokeWidthImage)
-title('Stroke Width Image')
+% figure
+% subplot(1,2,1)
+% imagesc(regionImage)
+% title('Region Image')
+% 
+% subplot(1,2,2)
+% imagesc(strokeWidthImage)
+% title('Stroke Width Image')
 
 % Compute the stroke width variation metric 
 strokeWidthValues = distanceImage(skeletonImage);   
@@ -95,12 +95,12 @@ mserRegions(strokeWidthFilterIdx) = [];
 mserStats(strokeWidthFilterIdx) = [];
 
 % Show remaining regions
-figure
-imshow(I)
-hold on
-plot(mserRegions, 'showPixelList', true,'showEllipses',false)
-title('After Removing Non-Text Regions Based On Stroke Width Variation')
-hold off
+% figure
+% imshow(I)
+% hold on
+% plot(mserRegions, 'showPixelList', true,'showEllipses',false)
+% title('After Removing Non-Text Regions Based On Stroke Width Variation')
+% hold off
 
 % Get bounding boxes for all the regions
 bboxes = vertcat(mserStats.BoundingBox);
@@ -172,7 +172,8 @@ title('Detected Text')
 
 ocrtxt = ocr(I, textBBoxes);
 string = [ocrtxt.Text];
-string = deblank(string)
+string = deblank(string);
+string = strjoin(strsplit(string), '');
 TF = contains(string, 'STOP')
 
 if (contains(string, 'STOP') == 1) 
