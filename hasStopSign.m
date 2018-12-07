@@ -1,10 +1,15 @@
 function has_stop_sign = hasStopSign(image)
-% By default there is no stop sign
-% If all tests pass, then we can assume there is a stop sign
 score = 0;
 maxScore = 100;
 
-score = score + matchesTemplate(image);
+% Include these in the maxScore
+templateScore = matchesTemplate(image);
+
+% wordScore not included in maxScore as it is a bonus
+wordScore = hasWordStop(image);
+
+% Total score is calculated here
+score = templateScore + wordScore;
 
 stop_sign_confidence = score / maxScore;
-has_stop_sign = stop_sign_likelihood >= 0.5;
+has_stop_sign = stop_sign_confidence >= 0.5;
