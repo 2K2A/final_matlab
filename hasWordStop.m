@@ -174,7 +174,6 @@ ocrtxt = ocr(I, textBBoxes);
 string = [ocrtxt.Text];
 string = deblank(string);
 string = strjoin(strsplit(string), '');
-TF = contains(string, 'STOP')
 
 if (contains(string, 'STOP') == 1) 
     has_word_stop = 100;
