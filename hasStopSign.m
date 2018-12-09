@@ -1,18 +1,15 @@
 function has_stop_sign = hasStopSign(image)
-% By default there is no stop sign
-% If all tests pass, then we can assume there is a stop sign
-has_stop_sign = false;
+score = 0;
+maxScore = 100;
 
-if not(hasEightSides(image))
-    return
-end
+% Include these in the maxScore
+templateScore = matchesTemplate(image);
 
-% add tests by doing the following:
-% if not(test(image)) % Please break test into another script test.m
-%     return
-% end
-if not(hasEqualSides(image)) % Please break test into another script test.m
-    return
-end
+% wordScore not included in maxScore as it is a bonus
+wordScore = hasWordStop(image);
 
-has_stop_sign = true;
+% Total score is calculated here
+score = templateScore + wordScore;
+
+stop_sign_confidence = score / maxScore;
+has_stop_sign = stop_sign_confidence >= 0.5;
