@@ -1,47 +1,50 @@
 %% Boilerplate
 clear;
-% Image location.
-img_sets_loc = 'signs/';
-% Image set folder names.
-img_sets = {'vid0','vid1','vid2','vid3','vid4','vid5','vid6','vid7','vid8','vid9','vid10','vid11',};
+img_set = getFiles('signs');
 
-results = zeros(4,2);
+results = zeros(4,1);
 
-% Get a random image-set from the sets.
-set_idx = floor(rand(1)*length(img_sets))+1;
+positive_image_set = getFiles('signs/true');
+nPositiveImages = length(positive_image_set); 
 
-% Get a list of images in the set (to pass to the next section).
-img_set_sub = getFolders(strcat(img_sets_loc,img_sets{3}));
-img_set = getFiles(strjoin({img_sets_loc,img_sets{3},img_set_sub.name},"/"));
+for i=1:nPositiveImages
+   currentImageName = strcat('signs/true/', positive_image_set(i).name);
+   currentImage = imread(currentImageName);
+   [has_stop_sign, confidence] = hasStopSign(currentImage);
+   if (has_stop_sign)
+       % We say there is a stop sign and there is (pass)
+       results(1) = results(1) + 1;
+   else
+       % We say there is not a stop sign but there is (fail)
+       %currentImageName
+       results(2) = results(2) + 1;
+   end
+end
 
-%% Some tests
-for i=350:length(img_set)
-% For an image in image_set
-    im_path = strjoin({img_set(i).folder,img_set(i).name},"/");
-    % Read the image in.
-    img = imread(im_path);
-    % TODO: implement an object recognition algorithm.
-    [has_stop_sign,confidence] = hasStopSign(img);
-    a = getAnnotation(im_path);
-    % Now do some math.
-    actual_val = strcmp(a.AnnotationTag,'stop');
-    if (has_stop_sign & actual_val)
-        results(1,1) = results(1) + 1;
-        results(1,2) = confidence;
-    elseif (has_stop_sign & ~actual_val)
-        results(2,1) = results(2) + 1;
-        results(2,2) = confidence;
-    elseif (~has_stop_sign & actual_val)
-        results(3,1) = results(3) + 1;
-        results(3,2) = confidence;
-    else
-        % ~has_stop_sign & ~actual_val
-        results(4,1) = results(4) + 1;
-        results(4,2) = confidence;
-    end
-    results
+negative_image_set = getFiles('signs/false');
+nNegativeImages = length(negative_image_set); 
+
+for i=1:nNegativeImages
+   currentImageName = strcat('signs/false/', negative_image_set(i).name);
+   currentImage = imread(currentImageName);
+   [has_stop_sign, confidence] = hasStopSign(currentImage);
+   if (has_stop_sign)
+       % We say there is a stop sign but there isn't (fail)
+       %currentImageName
+       results(3) = results(3) + 1;
+   else
+       % We say there is not a stop sign and there isn't (pass)
+       results(4) = results(4) + 1;
+   end
 end
 
 %% Results
+% results(1) - True positives
+% results(2) - False negatives
+% results(3) - False Positives
+% results(4) - True negatives
 
 results
+total_correct = results(1) + results(4);
+total_wrong = results(2) + results(3);
+overall_accuracy = total_correct / (total_wrong + total_correct)
