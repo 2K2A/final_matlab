@@ -23,7 +23,7 @@ Return
     % For row in the table
     for i=1:height(csv)
         % Find our filename.
-        if csv.Filename{i} == image_name
+        if strcmp(csv.Filename{i},image_name)
             j=i;
             break;
         end
