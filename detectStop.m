@@ -14,6 +14,6 @@ f3 = ((f2 == 0) | f1) == 0;
 totalPixelsOfSTOP = sum(sum(f3));
 hasStopRatio = totalPixelsOfOct / totalPixelsOfSTOP;
 % The ration should be 5.26
-idealRatio = 5.26
+idealRatio = 5.26;
 score = max(0, 100 - (100 * abs(hasStopRatio - idealRatio) / idealRatio));
 
