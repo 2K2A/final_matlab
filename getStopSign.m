@@ -20,10 +20,10 @@ passes back the center of the object.
     if (~isempty(props))&(max([props.FilledArea])>70)
         % Grab the largest red thing...
         idx_big_stuff = find([props.FilledArea]==max([props.FilledArea]));
-        ul_x = uint8(props(idx_big_stuff).BoundingBox(1));
-        ul_y = uint8(props(idx_big_stuff).BoundingBox(2));
-        x_del = uint8(props(idx_big_stuff).BoundingBox(3));
-        y_del = uint8(props(idx_big_stuff).BoundingBox(4));
+        ul_x = uint16(props(idx_big_stuff).BoundingBox(1));
+        ul_y = uint16(props(idx_big_stuff).BoundingBox(2));
+        x_del = uint16(props(idx_big_stuff).BoundingBox(3));
+        y_del = uint16(props(idx_big_stuff).BoundingBox(4));
         %{
         x_pad = x_del*0.1;
         y_pad = y_del*0.1;
