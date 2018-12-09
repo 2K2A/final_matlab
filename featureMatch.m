@@ -1,4 +1,4 @@
-function score = featureMatch(img,template)
+function score = featureMatch(img, template)
 %{
     Takes an image and template, extracts features from the template, and
     looks to see if the features are in the target image.
@@ -12,7 +12,9 @@ function score = featureMatch(img,template)
 
     Requires vl_feat package.
 %}
-
+    if nargin < 2
+        template = imread('stop_sign_template.jpg');
+    end
     % Get features from template.
 %    gray_template = single(rgb2gray(template));
 %    [t_frames,t_desc] = vl_sift(gray_template);
