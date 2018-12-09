@@ -1,5 +1,5 @@
 function score = detectStop(img)
-image(img);
+%image(img);
 
 % figure;
 % imshow(((img(:,:,1)>155))&(img(:,:,2)<120)&(img(:,:,3)<120));

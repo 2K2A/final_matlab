@@ -77,7 +77,7 @@ function score = featureMatch(img, template)
         if isempty(scores)
             score = 0;
         else
-            score = 1/sqrt(sum(scores)/max(scores));
+            score = 1/sqrt(sum(scores)/max(scores))*100;
         end
     end
 end
