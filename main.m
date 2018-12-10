@@ -1,6 +1,5 @@
 %% Boilerplate
 clear;
-img_set = getFiles('signs');
 
 results = zeros(4,1);
 
